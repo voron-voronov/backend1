@@ -28,7 +28,7 @@ if ($ajax == "save") {
   } else if (!is_numeric($age) || $age < 0 || $age > 100) {
     $response['error'] = "Возраст может быть от 1 до 100!";
   } else {
-    $query = $link->prepare(" INSERT INTO user SET name=:name, surname=:surname, age=:age ");
+    $query = $link->prepare(" INSERT INTO users SET name=:name, surname=:surname, age=:age ");
     $params = ['name' => $name, 'surname' => $surname, 'age' => $age];
     $query->execute($params);
   }
@@ -52,7 +52,7 @@ if ($ajax == "save") {
   	$worksheets = $spreadsheet->getWorksheetFeed()->getEntries();
   	$worksheet = $worksheets[0];
   	$listFeed = $worksheet->getListFeed();
-    $query_news = $link->prepare("SELECT * FROM user WHERE age > '18' ");
+    $query_news = $link->prepare("SELECT * FROM users WHERE age > '18' ");
     $query_news->execute();
 
     $result = $query_news->fetchAll();
